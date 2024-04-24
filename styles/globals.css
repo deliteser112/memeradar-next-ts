@@ -54,3 +54,11 @@ input:focus {
   margin: 0 0.25rem;
   color: #666;
 }
+/* 
+.slick-prev {
+  left: 90%;
+} */
+
+.next-prev-button {
+  top: 110%;
+}

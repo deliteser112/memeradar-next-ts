@@ -3,10 +3,16 @@ import type { NextPage } from "next";
 // layouts
 import Layout from "../components/layouts";
 
+import { Banner, MemecoinServices, LatestMemeNews, TrendingList, MemeRadarCulture } from "../components/sections/home";
+
 const Home: NextPage = () => {
   return (
     <Layout title="Home">
-      Hello WOrld
+      <Banner />
+      <MemecoinServices />
+      <LatestMemeNews />
+      <TrendingList />
+      <MemeRadarCulture />
     </Layout>
   );
 };

@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 
 import Header from "./Header";
-import Footer from './Footer';
+import Footer from "./Footer";
 
 type Props = {
   children?: ReactNode;
@@ -11,7 +11,17 @@ type Props = {
 const Layout = ({ children, title = "Home" }: Props) => (
   <div>
     <Header title={title} />
-    <main className="max-w-[1200px] mx-auto my-10">{children}</main>
+    <main
+      style={{
+        backgroundImage: 'url("/images/bg-pattern.jpg")',
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        minHeight: "100vh",
+      }}
+    >
+      {children}
+    </main>
     <Footer />
   </div>
 );
