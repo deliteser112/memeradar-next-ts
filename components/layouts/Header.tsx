@@ -16,6 +16,7 @@ const Header = ({ title = "Home" }: Props) => {
         <title>{`MemeRadar | ${title}`}</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <link rel="icon" href="/logo.png" />
       </Head>
       <header className="bg-[#081225]">
         <nav className="relative navbar max-w-screen-xl min-h-[64px] lg:min-h-[96px] mx-auto px-4 shadow-xl justify-between">
