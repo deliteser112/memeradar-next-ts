@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import Image from "next/image";
+import web3 from "web3";
+
+const chainIdTestnet = 8453;
 
 type Props = {
   title?: string;
@@ -9,6 +12,57 @@ type Props = {
 
 const Header = ({ title = "Home" }: Props) => {
   const [isMenu, setIsMenu] = useState(false);
+  const [wallet, setWallet] = useState("");
+
+  const handleConnectWallet = async (): Promise<void> => {
+  
+    if ((window as any).ethereum) {
+      if ((window as any).ethereum.networkVersion !== chainIdTestnet.toString()) {
+        try {
+          await (window as any).ethereum.request({
+            method: "wallet_switchEthereumChain",
+            params: [{ chainId: web3.utils.toHex(chainIdTestnet) }],
+          });
+        } catch (err) {
+          if (err.code === 4902) {
+            await (window as any).ethereum.request({
+              method: "wallet_addEthereumChain",
+              params: [
+                {
+                  chainName: "BASE",
+                  chainId: web3.utils.toHex(chainIdTestnet),
+                  nativeCurrency: {
+                    name: "ETH",
+                    decimals: 18,
+                    symbol: "ETH",
+                  },
+                  rpcUrls: ["https://base.llamarpc.com"],
+                },
+              ],
+            });
+          }
+        }
+  
+        try {
+          const accounts = await (window as any).ethereum.request({ method: "eth_requestAccounts" });
+          setWallet(accounts[0]);
+        } catch (error) {
+          // Handle error
+          console.error(error);
+        }
+      } else {
+        try {
+          const accounts = await (window as any).ethereum.request({ method: "eth_requestAccounts" });
+          setWallet(accounts[0]);
+        } catch (error) {
+          // Handle error
+          console.error(error);
+        }
+      }
+    } else {
+      window.alert("No web3 wallet detected. Please Install metamask!");
+    }
+  };
 
   return (
     <div>
@@ -74,8 +128,12 @@ const Header = ({ title = "Home" }: Props) => {
               className="mr-12"
             />
 
-            <button className="ease-in duration-200 px-10 py-1 rounded-full border border-[#448EFC] text-white hover:bg-[#448EFC]">
-              Connect
+            <button onClick={handleConnectWallet} className="ease-in duration-200 px-10 py-1 rounded-full border border-[#448EFC] text-white hover:bg-[#448EFC]">
+            {wallet
+            ? `${wallet.substring(0, 3)}...${wallet.substring(
+                wallet.length - 3
+              )}`
+            : "Connect"}
             </button>
           </div>
         </nav>
@@ -93,8 +151,12 @@ const Header = ({ title = "Home" }: Props) => {
               ))}
               <div className="flex justify-between items-center">
                 <div />
-                <button className="ease-in duration-200 px-10 py-1 rounded-full border border-[#448EFC] text-white hover:bg-[#448EFC]">
-                  Connect
+                <button onClick={handleConnectWallet} className="ease-in duration-200 px-10 py-1 rounded-full border border-[#448EFC] text-white hover:bg-[#448EFC]">
+                {wallet
+            ? `${wallet.substring(0, 3)}...${wallet.substring(
+                wallet.length - 3
+              )}`
+            : "Connect"}
                 </button>
                 <img
                   src="/images/notification-dot.png"
