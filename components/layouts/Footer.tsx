@@ -1,7 +1,14 @@
 import React from "react";
 import Newsletter from "../common/Newsletter";
 
-const Footer = () => (
+
+
+const redirectTelegram = async () => {
+  
+}
+
+
+const Footer = () => (  
   <div className="bg-[#081225] pt-20">
     <div className="max-w-screen-xl mx-auto">
       <div className="flex flex-col lg:flex-row justify-between px-4 lg:px-0 pb-12">
@@ -10,10 +17,16 @@ const Footer = () => (
             1000 Memes, <br /> One Community
           </p>
           <div className="flex mt-10">
-            <button className="p-4 rounded-full border border-[#464D5C] mr-10">
+            <button onClick={(e) => {
+              e.preventDefault();
+              window.open("https://t.me/memeradarxyz", "_blank")
+            }} className="p-4 rounded-full border border-[#464D5C] mr-10">
               <img src="/images/telegram.svg" alt="telegram icon" />
             </button>
-            <button className="p-4 rounded-full border border-[#464D5C]">
+            <button onClick={(e) => {
+                e.preventDefault();
+                window.open("https://twitter.com/memeradarxyz", "_blank")
+            }} className="p-4 rounded-full border border-[#464D5C]">
               <img src="/images/x-icon.svg" alt="x icon" />
             </button>
           </div>
