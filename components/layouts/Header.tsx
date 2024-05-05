@@ -80,7 +80,7 @@ const Header = ({ title = "Home" }: Props) => {
           </div>
         </nav>
         {isMenu && (
-          <div className="absolute top-[64px] left-0 w-full bg-[#081225] lg:hidden z-10">
+          <div className="absolute top-[64px] left-0 w-full bg-[#081225] lg:hidden z-[9999]">
             <div className="space-y-1 px-2 pb-3 pt-2">
               {HEADERS.map((item, idx) => (
                 <a

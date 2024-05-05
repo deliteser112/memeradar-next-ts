@@ -12,7 +12,7 @@ interface Content {
   icon: string;
   earliest_detection: number;
   latest_detection: number;
-  weight: number;
+  weight: string;
   link: string;
 }
 
