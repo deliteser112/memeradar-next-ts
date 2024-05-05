@@ -28,7 +28,7 @@ const Banner = () => {
           <div className="flex my-4 justify-center lg:justify-start">
             <button
               className="font-bold text-white round-md bg-[#2D35F8] rounded-full py-2 px-6 mr-4"
-              onClick={() => router.push("/memecoin-scanner")}
+              // onClick={() => router.push("/memecoin-scanner")}
             >
               Explore Memecoins
             </button>
