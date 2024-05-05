@@ -82,6 +82,7 @@ const LatestMemeNews = () => {
             isBlack={news.isBlack}
             title={news.title}
             date={news.date}
+            mlink={news.mlink}
           />
         ))}
       </Slider>
@@ -93,31 +94,35 @@ export default LatestMemeNews;
 
 const newsData = [
   {
-    imageSrc: "/images/slide-1.png",
-    bannerTitle: "How to attract Active Users with Quests on MemeRadar",
-    title: "How to attract Active Users with Quests on MemeRadar",
+    imageSrc: "/images/1article.png",
+    bannerTitle: "",
+    title: "The Rise of Meme Coins on Base Network: A Layer 2 Phenomenon",
     isBlack: true,
     date: "3 Days ago",
+    mlink: "https://medium.com/@memeradar/the-rise-of-meme-coins-on-base-network-a-layer-2-phenomenon-a37478c4799c",
   },
   {
-    imageSrc: "/images/slide-2.png",
-    bannerTitle: "Top 10 Best Upcoming Memecoin Airdrops",
-    title: "Top 10 Best Upcoming Memecoin Airdrops",
+    imageSrc: "/images/2article.png",
+    bannerTitle: "",
+    title: "Top 50 Memecoins by Market Caps: A Whirlwind Tour of Crypto’s Lighter Side",
     isBlack: false,
     date: "1 Week ago",
+    mlink: "https://medium.com/@memeradar/top-50-memecoins-by-market-cap-a-whirlwind-tour-of-cryptos-lighter-side-358fdf823d15"
   },
   {
-    imageSrc: "/images/slide-3.png",
-    bannerTitle: "Top 50 Memecoins of 2023 : A Year of boom and bust",
-    title: "Meet the Creators of Top Memecoins of 2024",
+    imageSrc: "/images/3article.png",
+    bannerTitle: "",
+    title: "The Surprise Winners of Crypto’s First Quarter",
     isBlack: false,
     date: "2 Weeks ago",
+    mlink: "https://medium.com/@memeradar/meme-coins-steal-the-spotlight-the-surprise-winners-of-cryptos-first-quarter-7791bcd08dc5"
   },
   {
-    imageSrc: "/images/slide-4.png",
-    bannerTitle: "Meet the Creators of Top Memecoins of 2024",
-    title: "Top 50 Memecoins of 2023 : A Year of 2023",
+    imageSrc: "/images/4article.png",
+    bannerTitle: "",
+    title: "Top 10 Memecoins on Solana",
     isBlack: false,
     date: "2 Weeks ago",
+    mlink: "https://medium.com/@memeradar/top-10-memecoins-on-solana-the-whimsy-the-hype-and-the-community-e4779dc657cf"
   },
 ];

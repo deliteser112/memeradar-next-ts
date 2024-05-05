@@ -6,9 +6,10 @@ type NewsCardProps = {
   isBlack: boolean;
   title: string;
   date: string;
+  mlink: string;
 };
 
-const NewsCard: React.FC<NewsCardProps> = ({ imageSrc, bannerTitle, isBlack, title, date }) => {
+const NewsCard: React.FC<NewsCardProps> = ({ imageSrc, bannerTitle, isBlack, title, date, mlink }) => {
   return (
     <div className="p-4 border border-[#47455B] rounded-xl min-h-[320px] max-w-[320px] mx-auto">
       <div className="relative">
@@ -19,7 +20,9 @@ const NewsCard: React.FC<NewsCardProps> = ({ imageSrc, bannerTitle, isBlack, tit
       <div className="flex justify-between">
         <p className="text-white text-[10px]">{date}</p>
         <div className="flex items-center">
-          <span className="text-white text-[10px] mr-1">Read Now</span>
+          <span onClick={() => {
+            window.location.href=mlink;
+          }} className="text-white text-[10px] mr-1">Read Now</span>
           <img src="/images/arrow-right.svg" className="mt-[1px]" alt="arrow right" />
         </div>
       </div>
