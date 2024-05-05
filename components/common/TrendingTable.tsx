@@ -25,11 +25,22 @@ const TrendingTable: React.FC<TrendingTableProps> = ({ headers, content }) => {
                 key={index}
                 className={`py-2 px-4 ${header.isOrder ? "text-center" : ""}`}
               >
-                
                 <div className="flex justify-center items-center">
                   <span className="mr-1">{header.title}</span>
-                  <img src="/images/table-order.svg" className="mt-[1px] h-3 w-3 mr-1" alt="warning order" />
-                  <img src="/images/table-warning.svg" className="mt-[1px] h-4 w-4" alt="warning warning" />
+                  {header.isWarning && (
+                    <>
+                      <img
+                        src="/images/table-order.svg"
+                        className="mt-[1px] h-3 w-3 mr-1"
+                        alt="warning order"
+                      />
+                      <img
+                        src="/images/table-warning.svg"
+                        className="mt-[1px] h-4 w-4"
+                        alt="warning warning"
+                      />
+                    </>
+                  )}
                 </div>
               </th>
             ))}

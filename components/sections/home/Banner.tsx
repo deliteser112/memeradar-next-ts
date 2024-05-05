@@ -1,6 +1,8 @@
 import React from "react";
+import { useRouter } from "next/router";
 
 const Banner = () => {
+  const router = useRouter();
   return (
     <div className="container mx-auto px-4 lg:px-0">
       <div className="flex flex-col lg:flex-row items-center justify-between max-w-[1280px] mx-auto py-8">
@@ -9,7 +11,11 @@ const Banner = () => {
             Discover trending{" "}
             <span className="relative">
               <span>Memecoins</span>
-              <img src="/images/curve.svg" alt="curve" className="absolute left-0 bottom-[-5px] w-full" />
+              <img
+                src="/images/curve.svg"
+                alt="curve"
+                className="absolute left-0 bottom-[-5px] w-full"
+              />
             </span>{" "}
             on TON, Solana & BASE
           </p>
@@ -20,7 +26,10 @@ const Banner = () => {
             our TG bot, you can easily buy meme coins and snipe them.
           </p>
           <div className="flex my-4 justify-center lg:justify-start">
-            <button className="font-bold text-white round-md bg-[#2D35F8] rounded-full py-2 px-6 mr-4">
+            <button
+              className="font-bold text-white round-md bg-[#2D35F8] rounded-full py-2 px-6 mr-4"
+              onClick={() => router.push("/memecoin-scanner")}
+            >
               Explore Memecoins
             </button>
             <button className="font-bold text-white round-md bg-[#2D35F8] rounded-full py-2 px-6">
