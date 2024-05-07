@@ -36,9 +36,9 @@ const Footer = () => (
           <div className="mb-8 lg:mb-0">
             <p className="text-white mb-4">Product</p>
             <ul>
-              {PRODUCTS.map((item, idx) => (
+              {PRODUCTS_FOOTER.map((item, idx) => (
                 <li key={idx} className="text-[#C1C4C8] mt-2">
-                  <a href="/">{item}</a>
+                  <a href={item.link}>{item.title}</a>
                 </li>
               ))}
             </ul>
@@ -72,13 +72,36 @@ const Footer = () => (
   </div>
 );
 
+const PRODUCTS_FOOTER = [
+  {
+    title: "Rankings",
+    link: ""
+  },
+  {
+    title: "Rewards",
+    link: "https://app.galxe.com/quest/JPHBmu7Pdo6PUYtTrFtSwY"
+  },
+  {
+    title: "Contribute",
+    link: "https://zealy.io/cw/memeradar/questboard"
+  },
+  {
+    title: "Blog",
+    link: ""
+  },
+  {
+    title: "Memeradar Token",
+    link: ""
+  },
+
+]
+
 export default Footer;
 
 const PRODUCTS = [
   "Rankings",
   "Rewards",
   "Contribute",
-  "Services",
   "Blog",
   "MemeRadar Token",
 ];

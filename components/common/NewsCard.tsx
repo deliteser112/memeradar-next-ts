@@ -12,8 +12,8 @@ type NewsCardProps = {
 const NewsCard: React.FC<NewsCardProps> = ({ imageSrc, bannerTitle, isBlack, title, date, mlink }) => {
   return (
     <div className="p-4 border border-[#47455B] rounded-xl min-h-[320px] max-w-[320px] mx-auto">
-      <div className="relative">
-        <img src={imageSrc} alt="news slide" />
+      <div onClick={() =>  window.location.href=mlink} className="relative">
+        <img className=' cursor-pointer' src={imageSrc} alt="news slide" />
         <p className={`absolute top-[50%] left-[10px] ${isBlack ? 'text-black' : 'text-white'}`}>{bannerTitle}</p>
       </div>
       <h3 className="text-white my-8">{title}</h3>

@@ -109,15 +109,15 @@ const Header = ({ title = "Home" }: Props) => {
             </Link>
           </div>
           <div className="hidden navbar-end lg:flex">
-            {HEADERS.map((item, idx) => (
-              <Link href="/" key={idx}>
-                <div className="flex items-center mr-12">
-                  <span className="text-white normal-case mr-1">{item}</span>
-                  <img
+            {NAV_HEADER.map((item, idx) => (
+              <Link href={item.link} key={idx}>
+                <div className="flex items-center mr-12 hover:bg-gray-700 hover:text-white block rounded-md  px-3 py-2 text-base font-medium">
+                  <span className="text-white normal-case mr-1 ">{item.title}</span>
+                  {/* <img
                     src="/images/arrow-down.svg"
                     alt="arrow down"
                     className="mt-1"
-                  />
+                  /> */}
                 </div>
               </Link>
             ))}
@@ -140,13 +140,13 @@ const Header = ({ title = "Home" }: Props) => {
         {isMenu && (
           <div className="absolute top-[64px] left-0 w-full bg-[#081225] lg:hidden z-[9999]">
             <div className="space-y-1 px-2 pb-3 pt-2">
-              {HEADERS.map((item, idx) => (
+              {NAV_HEADER.map((item, idx) => (
                 <a
                   key={idx}
-                  href="#"
+                  href={item.link}
                   className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
                 >
-                  {item}
+                  {item.title}
                 </a>
               ))}
               <div className="flex justify-between items-center">
@@ -174,11 +174,25 @@ const Header = ({ title = "Home" }: Props) => {
 
 export default Header;
 
-const HEADERS = [
-  "Rankings",
-  "Rewards",
-  "Contribute",
-  "Services",
-  "Blog",
-  "Radar",
-];
+const NAV_HEADER = [
+  {
+    title: "Rankings",
+    link: ""
+  },
+  {
+    title: "Rewards",
+    link: "https://app.galxe.com/quest/JPHBmu7Pdo6PUYtTrFtSwY"
+  },
+  {
+    title: "Contribute",
+    link: "https://zealy.io/cw/memeradar/questboard"
+  },
+  {
+    title: "Blog",
+    link: ""
+  },
+  {
+    title: "Radar",
+    link: ""
+  }
+]
