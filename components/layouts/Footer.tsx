@@ -83,7 +83,7 @@ const PRODUCTS_FOOTER = [
   },
   {
     title: "Contribute",
-    link: "https://zealy.io/cw/memeradar/questboard"
+    link: "https://www.intract.io/project/memeradar"
   },
   {
     title: "Blog",
