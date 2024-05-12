@@ -3,11 +3,6 @@ import Newsletter from "../common/Newsletter";
 
 
 
-const redirectTelegram = async () => {
-  
-}
-
-
 const Footer = () => (  
   <div className="bg-[#081225] pt-20">
     <div className="max-w-screen-xl mx-auto">

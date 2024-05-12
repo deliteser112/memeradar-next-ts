@@ -1,30 +1,87 @@
 import React, { useState, useEffect } from "react";
-import MemeCoinTable from "./MemeCoinTable";
+import MemeCoinTable, { Content } from "./MemeCoinTable";
 import TabButton from "../../common/TabButton";
+import axios from "axios";
+const dayjs = require('dayjs')
+var utc = require('dayjs/plugin/utc')
+dayjs.extend(utc)
 
 import Pagination from "../../common/Pagination";
 
 const tabs = ["TON", "BASE", "SOL"];
+const API_URL = 'https://memeradar-test-5104f1200750.herokuapp.com/tokenranking'
+
+interface TokenRanking
+{
+  earliestTimeDetection: string;
+  latestTimeDetection: string;
+  tweetToken: string;
+  tokenWeight: number;
+  network: string;
+  link: string
+  totalMentioned: number;
+}
 
 const MemeCoinScanner: React.FC = () => {
-  const [tableContent, setTableContent] = useState([]);
+  const [tableContent, setTableContent] = useState<Content[]>([]);
   const [activeTab, setActiveTab] = useState("BASE");
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10); // Default is 10
+  const [originalTable, setOriginalTable] = useState<Content[]>([]);
+
+
+  const getTokenList = async () => {
+    const data = await axios.get(API_URL);
+    return data.data as TokenRanking[];
+  }
+
+
+  const processTokenList = async () => {
+    const tokenList = await getTokenList();
+   
+    const tokenContent = tokenList.map(obj => 
+      ({
+        total_accounts: obj.totalMentioned,
+        name: `$${obj.tweetToken.toUpperCase()}`,
+        icon: "",
+        earliest_detection: dayjs().diff(dayjs.utc(obj.earliestTimeDetection), "minute"),
+        latest_detection: dayjs().diff(dayjs.utc(obj.latestTimeDetection), "minute"),
+        weight: obj.tokenWeight.toString(),
+        link: obj.link,
+        network: obj.network
+      } as Content)
+      )
+    setTableContent(tokenContent.filter(obj => obj.network === "base"));
+    setOriginalTable(tokenContent);
+
+  }
+
 
   useEffect(() => {
-    const dynamicData = Array.from({ length: 40 }, (_, index) => ({
-      total_accounts: Math.floor(Math.random() * 10) + 1,  // Dynamic part
-      name: index % 2 === 0 ? "Dogecoin" : "Shiba Inu",
-      icon: index % 2 === 0 ? "/images/dogecoin-icon.png" : "/images/shibacoin-icon.png",
-      earliest_detection: Math.floor(Math.random() * 60) + 10,
-      latest_detection: Math.floor(Math.random() * 60) + 10,
-      weight: parseFloat((Math.random() * 2 + 1).toFixed(1)),
-      link: "https://example.com"
-    }));
-    setTableContent(dynamicData);
+    processTokenList();
+    // const dynamicData = Array.from({ length: 40 }, (_, index) => ({
+    //   total_accounts: Math.floor(Math.random() * 10) + 1,  // Dynamic part
+    //   name: index % 2 === 0 ? "Dogecoin" : "Shiba Inu",
+    //   icon: index % 2 === 0 ? "/images/dogecoin-icon.png" : "/images/shibacoin-icon.png",
+    //   earliest_detection: Math.floor(Math.random() * 60) + 10,
+    //   latest_detection: Math.floor(Math.random() * 60) + 10,
+    //   weight: parseFloat((Math.random() * 2 + 1).toFixed(1)),
+    //   link: "https://example.com"
+    // }));
+    // setTableContent(dynamicData);
   }, []);
+
+  useEffect(() => {
+    let filteredTableContent;
+     if (activeTab === "BASE")
+      filteredTableContent = originalTable.filter((item) => item.network === 'base');
+     else if (activeTab === "SOL")
+      filteredTableContent = originalTable.filter((item) => item.network === "sol");
+     else 
+       filteredTableContent = originalTable.filter((item) => item.network === "ton");
+    setTableContent(filteredTableContent);
+  }, [activeTab])
 
   // Get current items
   const indexOfLastItem = currentPage * itemsPerPage;

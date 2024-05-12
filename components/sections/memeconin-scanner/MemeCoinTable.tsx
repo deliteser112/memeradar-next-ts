@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 interface Header {
   title: string;
@@ -6,7 +6,7 @@ interface Header {
   isWarning: boolean;
 }
 
-interface Content {
+export interface Content {
   total_accounts: number;
   name: string;
   icon: string;
@@ -14,6 +14,7 @@ interface Content {
   latest_detection: number;
   weight: string;
   link: string;
+  network: string;
 }
 
 interface MemeCoinTableProps {
@@ -22,6 +23,29 @@ interface MemeCoinTableProps {
 }
 
 const MemeCoinTable: React.FC<MemeCoinTableProps> = ({ headers, content }) => {
+
+  const [sortAccount, setSortAccount] = useState(false);
+  const [sortEarlyTime, setEarliestTime] = useState(false);
+  const [sortLatestTime, setLatestTime] = useState(false);
+
+  const sortData = (eventData, ) => {
+
+  }
+
+  const getElapsedTime = (minutes: number) => {
+    let min = minutes % 60;
+    let hour = (minutes - min) / 60;
+    let remainderHour = hour % 60;
+    let days = (hour - remainderHour) / 24;
+
+    if (hour > 0 && days <= 0)
+      return `${hour} hrs ${min} min ago`
+    else if (days > 0)
+      return `${days} days ${remainderHour} hrs ago`
+
+    return `${minutes} min ago`
+  }
+
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full border-collapse">
@@ -40,6 +64,7 @@ const MemeCoinTable: React.FC<MemeCoinTableProps> = ({ headers, content }) => {
                         src="/images/table-order.svg"
                         className="mt-[1px] h-3 w-3 mr-1"
                         alt="warning order"
+                        onClick
                       />
                       <img
                         src="/images/table-warning.svg"
@@ -65,17 +90,17 @@ const MemeCoinTable: React.FC<MemeCoinTableProps> = ({ headers, content }) => {
             >
               <td className="py-3 px-4 text-white">{item.total_accounts}</td>
               <td className="py-3 px-4 text-white">
-                <img
+                {/* <img
                   src={item.icon}
                   alt={item.name}
                   className="h-6 w-6 inline mr-2"
-                />
+                /> */}
                 {item.name}
               </td>
               <td className="py-3 px-4 text-white">
-                {item.earliest_detection}min
+                {getElapsedTime(item.earliest_detection)}
               </td>
-              <td className="py-3 px-4 text-white">{item.latest_detection}min</td>
+              <td className="py-3 px-4 text-white">{getElapsedTime(item.latest_detection)}</td>
               <td className="py-3 px-4 text-white">{item.weight}</td>
               <td className="py-3 px-4 text-white">
                 <a href={item.link} className=" text-right text-blue-500 hover:underline">
